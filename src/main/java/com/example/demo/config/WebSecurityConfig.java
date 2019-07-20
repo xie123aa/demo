@@ -23,10 +23,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
                     .authorizeRequests()
                     //这两个路径不需要验证
                     .antMatchers("/", "/home").permitAll()
+                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
-                    //更新后的配置指定登录页面的位置。
+                    //重新启用默认配置页。
                     .loginPage("/login")
                     //我们必须授予所有用户（即未经身份验证的用户）访问我们的登录页面的权限。
                     // formLogin（）.permitAll（）方法允许为与基于表单的登录相关联的所有URL授予对所有用户的访问权限。
